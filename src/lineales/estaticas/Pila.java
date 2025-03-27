@@ -31,11 +31,15 @@ public class Pila {
         if(this.tope < 0){
             exito = false;
         }else{
-            this.arreglo[this.tope] = null;
+            if(this.tope == 0){
+                this.arreglo[this.tope] = null;
+            }else{
+                this.arreglo[this.tope] = this.arreglo[this.tope - 1];
+            }
             this.tope--;
             exito = true;
         }
-        return false;
+        return exito;
     }
 
     public Object obtenerTope(){
@@ -60,29 +64,38 @@ public class Pila {
     }
 
     public void vaciar(){
-        // verificar esto
-        this.arreglo = null;
+        // Mientras el tope sea mayor a 0, es decir, mientras tenga elementos que los elimine
+        while(this.tope >= 0){
+            this.arreglo[this.tope] = null;
+            this.tope--;
+        }
     }
 
     public Pila clonar(){
         // Recorrer el arreglo con un for pasando por cada elemento
         // y hacer una copia de los elementos en una nueva pila
-        Pila pilaAux = new Pila();
+        Pila pilaClon = new Pila();
 
-        for(int i = 0; i < this.tope; i++){
-            pilaAux.arreglo[i] = this.arreglo[i];
+        for(int i = 0; i <= this.tope; i++){
+            pilaClon.arreglo[i] = this.arreglo[i];
         }
-        return pilaAux;
+        pilaClon.tope = this.tope;
+        return pilaClon;
     }
 
+    @Override
     public String toString(){
         // Esto debe recorrer el array y retornar una cadena de caracteres con los valores
-        String valores = "";
+        String s = "";
 
-        for(int i = 0; i < this.tope; i++){
-            valores += this.arreglo[i];
+        if(this.tope < 0){
+            s = "Pila vacia";
+        }else{
+            for(int i = 0; i <= this.tope; i++){
+                s += this.arreglo[i] + ", ";
+            }
         }
 
-        return valores;
+        return s;
     }
 }
