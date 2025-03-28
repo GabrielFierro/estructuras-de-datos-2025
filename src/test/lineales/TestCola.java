@@ -14,7 +14,7 @@ public class TestCola {
         boolean esCapicua;
 
         // Secuencia de valores enteros 1,5,3,7,2,8
-        System.out.println("\nTest para Cola estatica");
+        System.out.println("\nTest para Cola dinamica");
         System.out.println("\nVer estado de la cola vacia antes de ingresar elementos: " + c1.toString());
         System.out.println("\nAgregar hasta 7 elementos en la cola");
         System.out.println("Agregar el valor 1: " + c1.poner(1));
@@ -32,16 +32,9 @@ public class TestCola {
 
         System.out.println("\nVer los elementos de la cola: " + c1.toString());
 
-        System.out.println("Corregir el metodo poner creo que el error esta ahi porque solo muestra el primer elemetno del arreglo");
-
-        /*System.out.println("\nObtener el frente de la cola (deberia ser 1): " + c1.obtenerFrente());
+        System.out.println("\nObtener el frente de la cola (deberia ser 1): " + c1.obtenerFrente());
 
         System.out.println("\nVer los elementos de la cola despues de obtener el frente: " + c1.toString());
-
-        *//*System.out.println("Desapilar (esto deberia sacar el ultimo elemento): " + p1.desapilar());*//*
-        System.out.println("\nSacar (esto deberia sacar el primer elemento y tendria null, 5, 3, 7, 2, 8, 4, null): " + c1.sacar());
-
-        System.out.println("\nVer los elementos de la cola despues de sacar un elemento: " + c1.toString());
 
         System.out.println("\nClonar la cola");
         clon = c1.clonar();
@@ -59,10 +52,12 @@ public class TestCola {
         System.out.println("\nVerifico si esta vacia: " + clon.esVacia());
         System.out.println("\nMuestro la cola clonada: " + clon.toString());
         System.out.println("Agregar el valor 6: " + clon.poner(6));
-        System.out.println("Agregar el valor 9: " + clon.poner(6));
-        if(!clon.poner(9)){
+        System.out.println("Agregar el valor 9: " + clon.poner(9));
+        if(!clon.poner(4)){
             System.out.println("La cola esta llena");
+        }else{
+            System.out.println("Agregar el valor 4");
         }
-        System.out.println("\nMuestro la cola clonada: " + clon.toString());*/
+        System.out.println("\nMuestro la cola clonada: " + clon.toString());
     }
 }
