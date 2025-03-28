@@ -10,10 +10,16 @@ public class Cola {
     }
 
     public boolean poner(Object nuevoElem){
+        // Primer caso no tengo elementos entonces frente y fin apuntan al mismo lugar --> []
+        // Segundo caso tengo por lo menos 1 elemento
         Nodo nuevo = new Nodo(nuevoElem, null);
-        this.fin = nuevo;
+
         if(this.frente == null){
+            this.fin = nuevo;
             this.frente = nuevo;
+        }else{
+            this.fin.setEnlace(nuevo);
+            this.fin = nuevo;
         }
         return true;
     }
@@ -54,12 +60,16 @@ public class Cola {
 
     public Cola clonar(){
         Cola clon = new Cola();
-        Nodo frenteAux = this.frente;
 
         if(this.frente != null){
-            if(frenteAux.getEnlace() != null){
-                clon.frente = this.frente;
-                frenteAux = this.frente.getEnlace();
+            Nodo aux = this.frente;
+            clon.frente = aux;
+            clon.fin = aux;
+            aux = aux.getEnlace();
+
+            while(aux != null){
+                clon.fin = aux;
+                aux = aux.getEnlace();
             }
         }
         return clon;
