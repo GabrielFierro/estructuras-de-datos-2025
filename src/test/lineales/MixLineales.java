@@ -30,12 +30,18 @@ public class MixLineales {
     }
 
     public static Cola generarOtraCola(Cola c1){
+        // $
+        // c1 = A,B,$,C,$,D,E,F
+        // Debe retornar A,B,B,A,$,C,C,$,D,E,F,F,E,D
+            
+        // pila: A,B -> BA
+        // Cola: A,B -> AB
         // Zona de declaracion de variables
         Cola copia, colaAux, nuevaCola;
         Pila aux = new Pila();
         Object frente;
         // Zona de inicializacion de variables
-        copia = c1.clonar();
+        copia = c1.clone();
         colaAux = new Cola();
         nuevaCola = new Cola();
 
@@ -54,6 +60,7 @@ public class MixLineales {
                     nuevaCola.poner(aux.obtenerTope());
                     aux.desapilar();
                 }
+                nuevaCola.poner('$');
             }
             copia.sacar();
         }
