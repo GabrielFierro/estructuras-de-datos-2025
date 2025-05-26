@@ -213,10 +213,6 @@ public class ArbolBB {
         return maximo;
     }
 
-    public void vaciar() {
-        this.raiz = null;
-    }
-
     @Override
     public String toString() {
         String arbol = "";
