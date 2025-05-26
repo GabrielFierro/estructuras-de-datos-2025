@@ -171,6 +171,48 @@ public class ArbolBB {
         }
     }
 
+    public Comparable minimoElem() {
+        Comparable minimo = -1;
+
+        if (this.raiz != null) {
+            minimo = minimoElemAux(this.raiz);
+        }
+        return minimo;
+    }
+
+    private Comparable minimoElemAux(NodoABB nodo) {
+        Comparable minimo = -1;
+
+        if (nodo != null) {
+            minimo = nodo.getElem();
+            if (nodo.getIzquierdo() != null) {
+                minimo = minimoElemAux(nodo.getIzquierdo());
+            }
+        }
+        return minimo;
+    }
+
+    public Comparable maximoElem() {
+        Comparable maximo = -1;
+
+        if (this.raiz != null) {
+            maximo = maximoElem(this.raiz);
+        }
+        return maximo;
+    }
+
+    private Comparable maximoElem(NodoABB nodo) {
+        Comparable maximo = -1;
+
+        if (nodo != null) {
+            maximo = nodo.getElem();
+            if (nodo.getDerecho() != null) {
+                maximo = maximoElem(nodo.getDerecho());
+            }
+        }
+        return maximo;
+    }
+
     // // private NodoABB obtenerPosicion(NodoABB n, Object buscado, Object pos){
     // // NodoABB resultado = null;
 
