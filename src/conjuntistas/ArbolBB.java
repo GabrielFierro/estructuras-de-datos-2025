@@ -75,7 +75,6 @@ public class ArbolBB {
                     // Caso 2: Tiene 1 solo hijo (izquierdo)
                     eliminarCaso2(n, padre, elemento);
                 } else {
-                    System.out.println("Caso 3: Nodo a eliminar tiene 2 hijos");
                     eliminarCaso3(n);
                 }
             }
@@ -150,6 +149,28 @@ public class ArbolBB {
         return exito;
     }
 
+    public boolean esVacio() {
+        return this.raiz == null;
+    }
+
+    public Lista listar() {
+        // Recorre el arbol completo y devuelve una lista ordenada con todos los
+        // elementos
+        Lista lis = new Lista();
+        listarAux(this.raiz, lis);
+        return lis;
+    }
+
+    private void listarAux(NodoABB nodo, Lista lis) {
+        if (nodo != null) {
+            // recorre a sus hijos en inorden
+            listarAux(nodo.getIzquierdo(), lis);
+            // visita el elemento en el nodo
+            lis.insertar(nodo.getElem(), lis.longitud() + 1);
+            listarAux(nodo.getDerecho(), lis);
+        }
+    }
+
     // // private NodoABB obtenerPosicion(NodoABB n, Object buscado, Object pos){
     // // NodoABB resultado = null;
 
@@ -166,10 +187,6 @@ public class ArbolBB {
     // // }
     // // return resultado;
     // // }
-
-    public boolean esVacio() {
-        return this.raiz == null;
-    }
 
     // public int altura(){
     // // devuelve la altura del arbol, es decir, la longitud del camino mas largo
