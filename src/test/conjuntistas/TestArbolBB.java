@@ -1,6 +1,5 @@
 package test.conjuntistas;
 
-import lineales.dinamicas.Lista;
 import conjuntistas.*;
 
 public class TestArbolBB {
@@ -61,14 +60,23 @@ public class TestArbolBB {
 
         System.out.println("\nMuestro el Arbol Binario de Busqueda: " + arbol.toString());
 
+        System.out.println("---------------------------------------------------");
+
         System.out.println("\nElimino el nodo 1 del arbol: " + arbol.eliminar(1));
 
         System.out.println("\nMuestro el Arbol Binario de Busqueda: " + arbol.toString());
+
+        System.out.println("---------------------------------------------------");
 
         System.out.println("\nElimino el nodo 8 del arbol: " + arbol.eliminar(8));
 
         System.out.println("\nMuestro el Arbol Binario de Busqueda: " + arbol.toString());
 
+        System.out.println("---------------------------------------------------");
+
+        System.out.println("\nBusco el nodo 5 en el arbol: " + arbol.pertenece(5));
+
+        System.out.println("\n---------------------------------------------------");
         // System.out.println("\nBusco el padre del nodo A: " + arbol.padre("A"));
         // System.out.println("Busco el padre del nodo B: " + arbol.padre("B"));
         // System.out.println("Busco el padre del nodo C: " + arbol.padre("C"));
