@@ -10,12 +10,6 @@ public class TestArbolBB {
         ArbolBB arbol = new ArbolBB();
         Lista listarElementos = new Lista();
         Lista listarPorRango = new Lista();
-        // ArbolBB clon = new ArbolBB();
-        // Lista lisPre, lisIn, lisPos, lisNiv;
-        // Lista lisPreClon, lisInClon, lisPosClon, lisNivClon;
-        // Lista lisAncestrosClon;
-        // Lista lisDescendientesClon;
-        // Lista lisFronteraClon;
 
         System.out.println("---------------Comienzo de carga del arbol binario---------------");
 
