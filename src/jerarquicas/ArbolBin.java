@@ -1,5 +1,5 @@
 package jerarquicas;
-import lineales.dinamicas.Lista;
+import lineales.dinamicas.*;
 
 public class ArbolBin {
     private NodoArbol raiz;
@@ -49,6 +49,23 @@ public class ArbolBin {
         }
         return resultado;
     }
+    
+    // private NodoArbol obtenerPosicion(NodoArbol n, Object buscado, Object pos){
+    //     NodoArbol resultado = null;
+
+    //     if(n != null){
+    //         if(n.getElem().equals(buscado)){
+    //             resultado = n;
+    //         }else{
+    //             resultado = obtenerNodo(n.getIzquierdo(), buscado);
+
+    //             if(resultado == null){
+    //                 resultado = obtenerNodo(n.getDerecho(), buscado);
+    //             }
+    //         }
+    //     }
+    //     return resultado;
+    // }
 
     public boolean esVacio(){
         return this.raiz == null;
@@ -156,6 +173,118 @@ public class ArbolBin {
             listarPreordenAux(nodo.getDerecho(), lis);
         }
     }
+    
+    public Lista listarInorden(){
+        // retorna una lista con los elementos del arbol en PREORDEN
+        Lista lis = new Lista();
+        listarInordenAux(this.raiz, lis);
+        return lis;
+    }
+
+    private void listarInordenAux(NodoArbol nodo, Lista lis){
+        // metodo recursivo privado porque su parametro es de tipo NodoArbol
+
+        if(nodo != null){
+            // recorre a sus hijos en inorden
+            listarInordenAux(nodo.getIzquierdo(), lis);
+            // visita el elemento en el nodo
+            lis.insertar(nodo.getElem(), lis.longitud()+1);
+            listarInordenAux(nodo.getDerecho(), lis);
+        }
+    }
+    
+    public Lista listarPosorden(){
+        // retorna una lista con los elementos del arbol en PREORDEN
+        Lista lis = new Lista();
+        listarPosordenAux(this.raiz, lis);
+        return lis;
+    }
+
+    private void listarPosordenAux(NodoArbol nodo, Lista lis){
+        // metodo recursivo privado porque su parametro es de tipo NodoArbol
+
+        if(nodo != null){
+            // recorre a sus hijos en posorden
+            listarPosordenAux(nodo.getIzquierdo(), lis);
+            listarPosordenAux(nodo.getDerecho(), lis);
+            // visita el elemento en el nodo
+            lis.insertar(nodo.getElem(), lis.longitud()+1);
+        }
+    }
+
+    public Lista frontera(){
+        // Metodo que devuelve una lista con la secuencia formada por las hojas del arbol de izq a der
+        Lista listaNueva = new Lista();
+        fronteraAux(this.raiz, listaNueva);
+        return listaNueva;
+    }
+
+    private Lista fronteraAux(NodoArbol nodo, Lista listaNueva){
+
+        if(nodo != null){
+            fronteraAux(nodo.getIzquierdo(), listaNueva);
+            fronteraAux(nodo.getDerecho(), listaNueva);
+            if(nodo.getIzquierdo() == null && nodo.getDerecho() == null){ // es hoja
+                listaNueva.insertar(nodo.getElem(), listaNueva.longitud()+1);
+            }
+        }
+        return listaNueva;
+    }
+
+    // public Lista listarPorNiveles(){
+    //     Lista lis = new Lista();
+    //     Cola cola = new Cola();
+    //     listarPorNivelesAux(this.raiz, lis, cola);
+    //     return lis;
+    // }
+
+    // private void listarPorNivelesAux(NodoArbol nodo, Lista lis, Cola q){
+    //     if(nodo != null){
+    //         q.poner(nodo);
+    //         while(!q.esVacia()){
+    //             NodoArbol nodoActual = q.obtenerFrente();   
+    //             q.sacar();
+    //             listarPorNivelesAux(nodoActual, lis, q);            
+    //         }
+    //         // recorre a sus hijos por niveles
+    //         listarPorNivelesAux(nodo.getIzquierdo(), lis, q);
+    //         listarPorNivelesAux(nodo.getDerecho(), lis, q);
+    //         // visita el elemento en el nodo
+    //         lis.insertar(nodo.getElem(), lis.longitud()+1);
+    //     }
+    // }
+
+    public void vaciar(){
+        this.raiz = null;
+    }
+
+    public ArbolBin clone(){
+        // Metodo que dada una estructura de tipo Arbol binario, verifica si posee al menos un elemento e invoca
+        // al metodo cloneAux
+        // Zona de declaracion e inicializacion de una variable de tipo ArbolBin
+        ArbolBin clon = new ArbolBin();
+
+        if(this.raiz != null){
+            clon.raiz = cloneAux(this.raiz);
+        }
+        return clon;
+    }
+
+    private NodoArbol cloneAux(NodoArbol nodo){
+        // Metodo privado recursivo que dada una estructura de tipo Arbol Binario y un nodo de tipo NodoArbol
+        // recibidos por parametro, hace una copia exacta de los elementos de un Arbol en el mencionado
+        // y lo retorna.
+        NodoArbol nuevo = null;
+
+        if(nodo != null){
+            // Obtengo el nodo raiz
+            nuevo = new NodoArbol(nodo.getElem(), null, null);
+            // Recorro los subarboles izquierdo y derecho
+            nuevo.setIzquierdo(cloneAux(nodo.getIzquierdo()));
+            nuevo.setDerecho(cloneAux(nodo.getDerecho()));
+        }
+        return nuevo;
+    }
 
     @Override
     public String toString(){
@@ -178,15 +307,15 @@ public class ArbolBin {
             cadena = cadena + "\n\t\t" + nodo.getElem() + "\n";
 
             if(nodoIzq != null && nodoDer != null){
-               cadena = cadena + "\n" + "HI: " + nodoIzq.getElem() + "\tHD: " + nodoDer.getElem();
+               cadena = cadena + "\n\t" + "HI: " + nodoIzq.getElem() + "\t\t" + "HD: " + nodoDer.getElem() + "\n";
             }else{
                 if(nodoIzq != null){
-                   cadena = cadena + "\n" + "HI: " + nodoIzq.getElem() + "\tHD: -";
+                   cadena = cadena + "\n\t" + "HI: " + nodoIzq.getElem() + "\t\tHD: -" + "\n";
                 }else{
                     if (nodoDer != null) {
-                        cadena = cadena + "\n" + "HD: " + nodoDer.getElem();
+                        cadena = cadena + "\n" + "\t\t\tHD: " + nodoDer.getElem() + "\n";
                     }else{
-                        cadena = cadena + "HI: -" + "\tHD: -";
+                        cadena = cadena + "\n\tHI: -" + "\t\tHD: -" + "\n";
                     }
                 }
             }

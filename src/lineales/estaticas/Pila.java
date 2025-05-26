@@ -1,101 +1,110 @@
 package lineales.estaticas;
 
+/************* Autores ***********
+    Gabriel Fierro, Legajo FAI-1938
+    Veratti Juan Ignacio, FAI-5347
+    Fernando Lopez, Legajo: FAI-3996
+*/
+
 public class Pila {
-    private Object[] arreglo;
-    private int tope;
-    private static final int TAMANIO = 20;
 
+    private Object[] arrPila;
+    private int topePila;
+    private static final int CAPACIDAD = 10;
+
+    // Crea y devuelve la pila vacía.
     public Pila() {
-        this.arreglo = new Object[TAMANIO];
-        this.tope = -1;
+
+        this.arrPila = new Object[CAPACIDAD];
+        this.topePila = -1;
     }
 
-    public boolean apilar(Object newElem){
-        boolean exito;
+    // Pone el elemento nuevoElem en el tope de la pila. Devuelve verdadero si el elemento se pudo apilar y falso en caso contrario.
+    public boolean apilar(Object nuevoElem) {
+        boolean exito = false;
 
-        if(this.tope+1 >= this.TAMANIO){
-            // ERROR: pila llena
-            exito = false;
-        }else{
-            // pone el elemento en el tope de la pila
-            this.tope++;
-            this.arreglo[this.tope] = newElem;
+        if (this.topePila < CAPACIDAD - 1) {
+            this.topePila++;
+            this.arrPila[topePila] = nuevoElem;
+            exito = true;
+        }
+
+        return exito;
+    }
+
+    // Saca el elemento del tope de la pila. Devuelve verdadero si la pila no estaba vacía al momento de desapilar (es decir que se pudo desapilar) y falso en caso contrario.
+    public boolean desapilar() {
+        boolean exito = false;
+
+        if (this.topePila == 0) {
+            this.topePila = -1;
+            exito = true;
+        } else if (this.topePila > 0){
+            this.topePila--;
             exito = true;
         }
         return exito;
     }
 
-    public boolean desapilar(){
-        boolean exito;
+    // Devuelve el elemento en el tope de la pila. Precondición: la pila no está vacía. SI LA PILA ESTA VACIA DEVUELVE NULL.
+    public Object obtenerTope() {
+        Object elem = null;
 
-        if(this.tope < 0){
-            exito = false;
-        }else{
-            if(this.tope == 0){
-                this.arreglo[this.tope] = null;
-            }else{
-                this.arreglo[this.tope] = this.arreglo[this.tope - 1];
-            }
-            this.tope--;
-            exito = true;
+        if (this.topePila >= 0) {
+            elem = this.arrPila[topePila];
         }
-        return exito;
+
+        return elem;
     }
 
-    public Object obtenerTope(){
-        Object elemento;
-
-        if(this.tope < 0){
-            elemento = null;
-        }else{
-            elemento = arreglo[this.tope];
-        }
-        return elemento;
+    //Devuelve true si la pila está vacia o falso si no lo está.
+    public boolean esVacia() {
+        return this.topePila == -1;
     }
 
-    public boolean esVacia(){
-        return this.tope < 0;
-        /*boolean exito = false;
-
-        if(this.tope < 0){
-            exito = true;
-        }
-        return exito;*/
-    }
-
-    public void vaciar(){
-        // Mientras el tope sea mayor a 0, es decir, mientras tenga elementos que los elimine
-        while(this.tope >= 0){
-            this.arreglo[this.tope] = null;
-            this.tope--;
+    //Vacia la pila.
+    public void vaciar() {
+        /*this.topePila = -1;
+        this.arrPila = new Object[CAPACIDAD];*/
+        while(this.topePila >= 0) {
+            this.arrPila[this.topePila] = null;
+            this.topePila--;
         }
     }
 
-    public Pila clonar(){
-        // Recorrer el arreglo con un for pasando por cada elemento
-        // y hacer una copia de los elementos en una nueva pila
-        Pila pilaClon = new Pila();
-
-        for(int i = 0; i <= this.tope; i++){
-            pilaClon.arreglo[i] = this.arreglo[i];
-        }
-        pilaClon.tope = this.tope;
-        return pilaClon;
-    }
-
+    // Devuelve una copia exacta de los datos en la estructura original, y respetando el orden de los mismos,
+    // en otra estructura del mismo tipo.
     @Override
-    public String toString(){
-        // Esto debe recorrer el array y retornar una cadena de caracteres con los valores
-        String s = "";
+    public Pila clone() {
+        Pila nuevaPila = new Pila();
+        nuevaPila.topePila = this.topePila;
 
-        if(this.tope < 0){
-            s = "Pila vacia";
-        }else{
-            for(int i = 0; i <= this.tope; i++){
-                s += this.arreglo[i] + ", ";
-            }
+        for (int i = 0; i <= this.topePila; i++) {
+            nuevaPila.arrPila[i] = this.arrPila[i];
         }
 
+        return nuevaPila;
+    }
+
+    // Devuelve una cadena de caracteres formada por todos los elementos de la pila para poder mostrarla por pantalla. 
+    // Es recomendable utilizar este método únicamente en la etapa de prueba y luego comentarlo.
+    @Override
+    public String toString() {
+        String s;
+
+        if (this.esVacia()) {
+            s = "[]";
+        }else{
+            s = "[";
+            for (int i = topePila; i != -1; i--){
+                s += arrPila[i].toString();
+                if (i != 0){
+                    s += ",";
+                }
+            }
+            s += "]";
+        }
         return s;
     }
+    
 }

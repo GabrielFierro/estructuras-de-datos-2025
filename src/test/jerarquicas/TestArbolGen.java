@@ -1,46 +1,52 @@
 package test.jerarquicas;
 
-import jerarquicas.ArbolBin;
+import jerarquicas.ArbolGen;
 import lineales.dinamicas.Lista;
 
-public class TestArbolBin {
+public class TestArbolGen {
     static String sOk = "OK!", sErr = "ERROR";
     public static void main(String [] args){
-        ArbolBin arbol = new ArbolBin();
-        ArbolBin clon = new ArbolBin();
+        ArbolGen arbol = new ArbolGen();
+        ArbolGen clon = new ArbolGen();
         Lista lisPre, lisIn, lisPos, lisNiv;
         Lista lisPreClon, lisInClon, lisPosClon, lisNivClon;
         Lista lisAncestrosClon;
         Lista lisDescendientesClon;
         Lista lisFronteraClon;
 
-        System.out.println("---------------Comienzo de carga del arbol binario---------------");
+        System.out.println("---------------Comienzo de carga del arbol generico---------------");
 
         System.out.println("\nVerifico si el arbol esta vacio: " + (arbol.esVacio() ? sOk : sErr));
 
         System.out.println("\nAgregar la raiz A: " + (arbol.insertar("A","A", 'I') ? sOk : sErr));
 
-        System.out.println("Agregar el nodo izquierdo B al nodo A: " + (arbol.insertar("B","A", 'I') ? sOk : sErr));
-        System.out.println("Agregar el nodo derecho C al nodo A: " + (arbol.insertar("C","A", 'D') ? sOk : sErr));
-        System.out.println("Agregar el nodo izquierdo D al nodo B: " + (arbol.insertar("D","B", 'I') ? sOk : sErr));
-        System.out.println("Agregar el nodo izquierdo E al nodo C: " + (arbol.insertar("E","C", 'I') ? sOk : sErr));
-        System.out.println("Agregar el nodo derecho F al nodo C: " + (arbol.insertar("F","C", 'D') ? sOk : sErr));
-        System.out.println("Agregar el nodo izquierdo G al nodo E: " + (arbol.insertar("G", "E", 'I') ? sOk : sErr));
-        System.out.println("Agregar el nodo derecho H al nodo E: " + (arbol.insertar("H","E", 'D') ? sOk : sErr));
+        System.out.println("Agregar el nodo hijo izquierdo B al nodo A: " + (arbol.insertar("B","A", 'I') ? sOk : sErr));
+        System.out.println("Agregar el nodo hermano derecho C al nodo B: " + (arbol.insertar("C","A", 'D') ? sOk : sErr));
+        System.out.println("Agregar el nodo hijo izquierdo D al nodo B: " + (arbol.insertar("D","B", 'I') ? sOk : sErr));
+        System.out.println("Agregar el nodo hermano derecho E al nodo D: " + (arbol.insertar("E","B", 'D') ? sOk : sErr));
+        System.out.println("Agregar el nodo hijo izquierdo F al nodo C: " + (arbol.insertar("F","C", 'I') ? sOk : sErr));
+        System.out.println("Agregar el nodo hermano derecho G al nodo F: " + (arbol.insertar("G", "C", 'D') ? sOk : sErr));
+        System.out.println("Agregar el nodo hermano derecho H al nodo G: " + (arbol.insertar("H", "C", 'D') ? sOk : sErr));
+        System.out.println("Agregar el nodo hermano derecho I al nodo H: " + (arbol.insertar("I", "C", 'D') ? sOk : sErr));
 
-        System.out.println("Determino la frontera del arbol:" + arbol.frontera().toString());
+        // System.out.println("Determino la frontera del arbol:" + arbol.frontera().toString());
 
-        System.out.println("\nMuestro el arbol binario: " + arbol.toString());
+        System.out.println("\nMuestro el arbol generico: " + arbol.toString());
 
         System.out.println("\nBusco el padre del nodo A: " + arbol.padre("A"));
         System.out.println("Busco el padre del nodo B: " + arbol.padre("B"));
         System.out.println("Busco el padre del nodo C: " + arbol.padre("C"));
         System.out.println("Busco el padre del nodo D: " + arbol.padre("D"));
+        System.out.println("Busco el padre del nodo E: " + arbol.padre("E"));
+        System.out.println("Busco el padre del nodo F: " + arbol.padre("F"));
+        System.out.println("Busco el padre del nodo G: " + arbol.padre("G"));
+        System.out.println("Busco el padre del nodo H: " + arbol.padre("H"));
+        System.out.println("Busco el padre del nodo I: " + arbol.padre("I"));
 
 
         System.out.println("\n------Comienzo a listar el arbol en diferentes recorridos------");
 
-        System.out.println("\nMuestro el arbol binario: " + arbol.toString());
+        System.out.println("\nMuestro el arbol generico: " + arbol.toString());
 
         System.out.println("\nListar en preorden");
         lisPre = arbol.listarPreorden();
@@ -59,11 +65,11 @@ public class TestArbolBin {
         // System.out.println("Muestro la lista en preorden: " + lisNiv.toString());
 
 
-        System.out.println("\n------Determino la altura del arbol binario------");
+        System.out.println("\n------Determino la altura del arbol generico------");
 
-        System.out.println("\nMuestro el arbol binario: " + arbol.toString());
+        System.out.println("\nMuestro el arbol generico: " + arbol.toString());
 
-        System.out.println("\nLa altura del arbol binario es: " + arbol.altura());
+        System.out.println("\nLa altura del arbol generico es: " + arbol.altura());
 
         System.out.println("\nVacio el arbol");
         arbol.vaciar();
@@ -72,7 +78,7 @@ public class TestArbolBin {
 
         System.out.println("\nMuestro el arbol: " + arbol.toString());
 
-        System.out.println("\nLa altura del arbol binario vacio es: " + arbol.altura());
+        System.out.println("\nLa altura del arbol generico vacio es: " + arbol.altura());
 
         System.out.println("\nAgregar la raiz A: " + (arbol.insertar("A","A", 'I') ? sOk : sErr));
 
@@ -80,7 +86,7 @@ public class TestArbolBin {
 
         System.out.println("\nMuestro el arbol: " + arbol.toString());
 
-        System.out.println("\nLa altura del arbol binario solamente con la raiz es: " + arbol.altura());
+        System.out.println("\nLa altura del arbol generico solamente con la raiz es: " + arbol.altura());
 
         // System.out.println("\n------Determino el nivel de diferentes elementos sobre el arbol------");
 
@@ -119,11 +125,11 @@ public class TestArbolBin {
 
         // System.out.println("\nVerifico si el arbol clon esta vacio: " + (clon.esVacio() ? sOk : sErr));
 
-        // System.out.println("\nLa altura del arbol binario clon es: " + clon.altura());
+        // System.out.println("\nLa altura del arbol generico clon es: " + clon.altura());
 
         // System.out.println("\n------Comienzo a listar el arbol clonado en diferentes recorridos------");
 
-        // System.out.println("\nMuestro el arbol binario clon: " + clon.toString());
+        // System.out.println("\nMuestro el arbol generico clon: " + clon.toString());
 
         // System.out.println("\nListar en preorden");
         // lisPreClon = clon.listarPreorden();
@@ -180,7 +186,7 @@ public class TestArbolBin {
 
         // // System.out.println("Muestro la lista de la frontera: " + lisFronteraClon.toString());
 
-        // ArbolBin nuevoArbol = new ArbolBin();
+        // ArbolGen nuevoArbol = new ArbolGen();
         // Lista fronteraNuevoArbol = new Lista();
 
         // System.out.println("\nAgregar el nodo raiz A: " + (nuevoArbol.insertar("A","A", 'I') ? sOk : sErr));

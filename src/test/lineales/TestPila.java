@@ -11,6 +11,7 @@ public class TestPila {
         Pila clon = new Pila();
         boolean esCapicua;
 
+        System.out.println("Muestro la pila recien creada: " + p1.toString());
         // Secuencia de valores enteros 1,5,3,7,2,8
         System.out.println("Apilar valores numéricos del 1 al 10");
         System.out.println("Apilar el valor 1: " + p1.apilar(1));
@@ -34,7 +35,7 @@ public class TestPila {
         System.out.println("Ver los elementos de la pila: " + p1.toString());
 
         System.out.println("Clonar la pila");
-        clon = p1.clonar();
+        clon = p1.clone();
 
         System.out.println("Muestro la pila original: " + p1.toString());
         System.out.println("Muestro la pila clonada: " + clon.toString());
@@ -44,6 +45,8 @@ public class TestPila {
         if(p1.esVacia()){
             System.out.println("La pila esta vacia");
         }
+
+        System.out.println("Muestro la pila:" + p1.toString());
 
         System.out.println("Obtener tope de una pila vacia: " + p1.obtenerTope());
 
@@ -104,7 +107,7 @@ public class TestPila {
 
     public static boolean esCapicua(Pila p1){
         Pila p1Aux = new Pila();
-        Pila p2 = p1.clonar();
+        Pila p2 = p1.clone();
         boolean exito = true;
 
         while(!p1.esVacia()){

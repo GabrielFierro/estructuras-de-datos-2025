@@ -1,3 +1,4 @@
+package lineales.tests.paraEstudiantes;
 import static org.junit.Assert.*;
 
 import java.util.regex.Matcher;
@@ -5,8 +6,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-// import lineales.dinamicas.Cola; All asserts in true
-import lineales.estaticas.Cola; // All asserts in true
+import lineales.estaticas.Cola;
 
 /**
  *
@@ -159,7 +159,7 @@ public class ColaTest {
     @Test
     public void testCloneNonEmptyQueue(){
         Cola c=loadQueue("1,2,3",',');
-        Cola cClone=c.clonar();
+        Cola cClone=c.clone();
         boolean ev = c.esVacia();
         boolean evClone = cClone.esVacia();
         Object f = c.obtenerFrente();
@@ -182,7 +182,7 @@ public class ColaTest {
     @Test
     public void testCloneEmptyQueue(){
         Cola c=new Cola();
-        Cola cClone=c.clonar();
+        Cola cClone=c.clone();
         boolean ev = c.esVacia();
         boolean evClone = cClone.esVacia();
         Object f = c.obtenerFrente();

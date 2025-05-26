@@ -37,7 +37,7 @@ public class TestCola {
         System.out.println("\nVer los elementos de la cola despues de obtener el frente: " + c1.toString());
 
         System.out.println("\nClonar la cola");
-        clon = c1.clonar();
+        clon = c1.clone();
 
         System.out.println("\nMuestro la cola original: " + c1.toString());
         System.out.println("\nMuestro la cola clonada: " + clon.toString());

@@ -26,6 +26,6 @@ public class NodoArbol {
         this.izquierdo = izquierdo;
     }
     public void setDerecho(NodoArbol derecho){
-        this.izquierdo = derecho;
+        this.derecho = derecho;
     }
 }

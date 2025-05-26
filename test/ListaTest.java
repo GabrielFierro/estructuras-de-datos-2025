@@ -1,4 +1,4 @@
-// package lineales.tests.paraEstudiantes;
+package lineales.tests.paraEstudiantes;
 
 import java.util.regex.Pattern;
 
@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
 import org.junit.Test;
 
 import lineales.dinamicas.Lista;
+import lineales.estaticas.Cola;
 
 /**
  *

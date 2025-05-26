@@ -9,9 +9,11 @@ package lineales.dinamicas;
 
 public class Lista {
     private Nodo cabecera;
+    private int longitud;
 
     public Lista(){
         this.cabecera = null;
+        this.longitud = 0;
     }
 
     public boolean insertar(Object nuevoElem, int pos){
@@ -129,20 +131,32 @@ public class Lista {
         return contador;
     }
 
-    @Override
     public Lista clone() {
-        Lista nuevaLista = new Lista();
-        if (this.cabecera != null) {
-            int pos = 1;
-            Nodo aux = this.cabecera;
-            while (aux != null) {
-                nuevaLista.insertar(aux.getElem(), pos);
-                pos++;
-                aux = aux.getEnlace();
-            }
+        // Metodo que dada una estructura de tipo Lista, la recorre y copia los elementos en otra estructura similar.
+        // Retorna una lista.
+        // Zona de declaracion de variables
+        Lista lisClon;
+        // Zona de inicializacion de variables
+        lisClon = new Lista();
 
+        if(this.cabecera != null){
+            cloneAux(lisClon, this.cabecera);  // Invocacion de un metodo auxiliar recursivo privado
         }
-        return nuevaLista;
+
+        return lisClon;
+    }
+
+    private void cloneAux(Lista lis, Nodo n) {
+        // Metodo recursivo privado porque recibe el nodo de la clase misma, el cual no puede ser conocido por el
+        // usuario. Se llama a sí mismo, con casos más pequeños ya que en cada llamado utiliza el nodo siguiente
+        // con respecto al que recibe por parametro. De esa forma, recorre toda la estructura hasta encontrarse
+        // con que no tiene mas nodos cargados.
+        if (n != null) {
+            cloneAux(lis, n.getEnlace());
+            Nodo aux = new Nodo(n.getElem(), lis.cabecera);
+            lis.cabecera = aux;
+            lis.longitud++;
+        }
     }
 
     @Override

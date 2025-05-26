@@ -1,5 +1,9 @@
 package lineales.dinamicas;
-
+/************* Autores ***********
+    Gabriel Fierro, Legajo FAI-1938
+    Veratti Juan Ignacio, FAI-5347
+    Fernando Lopez, Legajo: FAI-3996
+*/
 public class Nodo {
     private Object elem;
     private Nodo enlace;
