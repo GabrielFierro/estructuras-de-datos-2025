@@ -58,6 +58,20 @@ public class TestArbolBB {
         listarElementos = arbol.listar();
 
         System.out.println("Mostrar la lista del arbol en forma creciente: " + listarElementos.toString());
+
+        System.out.println("---------------------------------------------------");
+
+        System.out.println("\nAgregar el nodo 1: " + (arbol.insertar(1) ? sOk : sErr));
+
+        System.out.println("\nMuestro el Arbol Binario de Busqueda: " + arbol.toString());
+
+        System.out.println("\nObtener el minimo del arbol: " + arbol.minimoElem());
+
+        System.out.println("\n---------------------------------------------------");
+
+        System.out.println("\nObtener el maximo del arbol: " + arbol.maximoElem());
+
+        System.out.println("\n---------------------------------------------------");
         // System.out.println("\nBusco el padre del nodo A: " + arbol.padre("A"));
         // System.out.println("Busco el padre del nodo B: " + arbol.padre("B"));
         // System.out.println("Busco el padre del nodo C: " + arbol.padre("C"));
