@@ -171,6 +171,37 @@ public class ArbolBB {
         }
     }
 
+    public Lista listarRango(Comparable elemMinimo, Comparable elemMaximo) {
+        // Recorre parte del arbol (solo lo necesario) y devuelve una lista ordenada
+        // con los elementos que se encuentran en el intervalo
+        // Recorrido inorden
+        Lista lista = new Lista();
+
+        if (this.raiz != null) {
+            listarRangoAux(this.raiz, elemMinimo, elemMaximo, lista);
+        }
+        return lista;
+    }
+
+    private void listarRangoAux(NodoABB nodo, Comparable elemMin, Comparable elemMax, Lista lis) {
+
+        if (nodo != null) {
+            if (elemMax.compareTo(nodo.getElem()) <= 0) {
+                listarRangoAux(nodo.getIzquierdo(), elemMin, elemMax, lis);
+                if (elemMax.compareTo(nodo.getElem()) >= 0) {
+                    lis.insertar(nodo.getElem(), lis.longitud() + 1);
+                    listarRangoAux(nodo.getDerecho(), elemMin, elemMax, lis);
+                }
+            } else if (elemMin.compareTo(nodo.getElem()) <= 0) {
+                listarRangoAux(nodo.getIzquierdo(), elemMin, elemMax, lis);
+                if (elemMax.compareTo(nodo.getElem()) >= 0) {
+                    lis.insertar(nodo.getElem(), lis.longitud() + 1);
+                    listarRangoAux(nodo.getDerecho(), elemMin, elemMax, lis);
+                }
+            }
+        }
+    }
+
     public Comparable minimoElem() {
         Comparable minimo = -1;
 
