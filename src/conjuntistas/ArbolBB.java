@@ -54,11 +54,11 @@ public class ArbolBB {
 
     private boolean eliminarAux(NodoABB n, NodoABB padre, Comparable elemento) {
         // precondicion: n no es nulo
-        // Caso 1: el nodo a eliminar es la raiz
-        // Caso 2: el nodo a eliminar es hoja
+        // Caso 1: el nodo a eliminar es hoja
+        // Caso 2: el nodo tiene al menos un hijo
         // Caso 3: el nodo esta en el medio, tengo que elegir 1 candidato
+        // Caso 4: el nodo a eliminar es la raiz
 
-        // caso 3: Elegir el candidato de la izquierda y reemplazarlo
         boolean exito = true;
 
         if (n != null) {
@@ -85,7 +85,6 @@ public class ArbolBB {
 
     private void eliminarCaso1(NodoABB nodo, Comparable elemento) {
         // Caso 1: Es hoja
-        System.out.println("nodo:" + nodo.getElem());
         if (elemento.compareTo(nodo.getElem()) < 0) {
             nodo.setIzquierdo(null);
         } else if (elemento.compareTo(nodo.getElem()) > 0) {
@@ -114,14 +113,41 @@ public class ArbolBB {
             padre = candidatoIzq;
             candidatoIzq = candidatoIzq.getDerecho();
         }
-        System.out.println("padre: " + padre.getElem());
-        System.out.println("Nodo:" + nodo.getElem());
+        // nodo = 8
+        // padre = 7
         nodo.setElem(padre.getElem());
 
         if (padre != null) {
-            padre.setElem(null);
+            padre.setElem(null); // Le asigna null y queda guardado como un elemento en el arbol
         }
 
+    }
+
+    public boolean pertenece(Comparable elem) {
+        // Devuelve verdadero si el elemento recibido por parametro esta en el arbol y
+        // falso en caso contrario
+        boolean exito = false;
+
+        if (this.raiz != null) {
+            exito = perteneceAux(this.raiz, elem);
+        }
+        return exito;
+    }
+
+    private boolean perteneceAux(NodoABB nodo, Comparable elem) {
+        boolean exito = false;
+
+        if (nodo != null) {
+            if (elem.compareTo(nodo.getElem()) < 0) {
+                exito = perteneceAux(nodo.getIzquierdo(), elem);
+            } else if (elem.compareTo(nodo.getElem()) > 0) {
+                exito = perteneceAux(nodo.getDerecho(), elem);
+            } else {
+                // Encontro el elemento
+                exito = true;
+            }
+        }
+        return exito;
     }
 
     // // private NodoABB obtenerPosicion(NodoABB n, Object buscado, Object pos){
