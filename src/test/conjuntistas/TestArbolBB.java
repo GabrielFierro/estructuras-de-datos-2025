@@ -1,12 +1,14 @@
 package test.conjuntistas;
 
 import conjuntistas.*;
+import lineales.dinamicas.Lista;
 
 public class TestArbolBB {
     static String sOk = "OK!", sErr = "ERROR";
 
     public static void main(String[] args) {
         ArbolBB arbol = new ArbolBB();
+        Lista listarElementos = new Lista();
         // ArbolBB clon = new ArbolBB();
         // Lista lisPre, lisIn, lisPos, lisNiv;
         // Lista lisPreClon, lisInClon, lisPosClon, lisNivClon;
@@ -15,32 +17,6 @@ public class TestArbolBB {
         // Lista lisFronteraClon;
 
         System.out.println("---------------Comienzo de carga del arbol binario---------------");
-
-        // System.out.println("\nVerifico si el arbol esta vacio: " + (arbol.esVacio() ?
-        // sOk : sErr));
-
-        // System.out.println("\nAgregar la raiz A: " + (arbol.insertar(7) ? sOk :
-        // sErr));
-        // System.out.println("\nAgregar el nodo: " + (arbol.insertar(9) ? sOk : sErr));
-        // System.out.println("\nAgregar el nodo: " + (arbol.insertar(4) ? sOk : sErr));
-        // System.out.println("\nAgregar el nodo: " + (arbol.insertar(3) ? sOk : sErr));
-        // System.out.println("\nAgregar el nodo: " + (arbol.insertar(5) ? sOk : sErr));
-        // System.out.println("\nAgregar el nodo: " + (arbol.insertar(8) ? sOk : sErr));
-        // System.out.println("\nAgregar el nodo: " + (arbol.insertar(2) ? sOk : sErr));
-
-        // // System.out.println("Determino la frontera del arbol:" +
-        // arbol.frontera().toString());
-
-        // System.out.println("\nMuestro el Arbol Binario de Busqueda: " +
-        // arbol.toString());
-
-        // System.out.println("\nElimino el nodo 4 del arbol: " + arbol.eliminar(4));
-
-        // System.out.println("\nMuestro el Arbol Binario de Busqueda: " +
-        // arbol.toString());
-
-        // System.out.println("\nVacio el Arbol Binario de Busqueda");
-        // arbol.vaciar();
 
         System.out.println("\nAgregar la raiz 3: " + (arbol.insertar(3) ? sOk : sErr));
         System.out.println("\nAgregar el nodo 1: " + (arbol.insertar(1) ? sOk : sErr));
@@ -68,15 +44,20 @@ public class TestArbolBB {
 
         System.out.println("---------------------------------------------------");
 
-        System.out.println("\nElimino el nodo 8 del arbol: " + arbol.eliminar(8));
+        // System.out.println("\nElimino el nodo 8 del arbol: " + arbol.eliminar(8));
 
-        System.out.println("\nMuestro el Arbol Binario de Busqueda: " + arbol.toString());
+        // System.out.println("\nMuestro el Arbol Binario de Busqueda: " +
+        // arbol.toString());
 
         System.out.println("---------------------------------------------------");
 
         System.out.println("\nBusco el nodo 5 en el arbol: " + arbol.pertenece(5));
 
         System.out.println("\n---------------------------------------------------");
+
+        listarElementos = arbol.listar();
+
+        System.out.println("Mostrar la lista del arbol en forma creciente: " + listarElementos.toString());
         // System.out.println("\nBusco el padre del nodo A: " + arbol.padre("A"));
         // System.out.println("Busco el padre del nodo B: " + arbol.padre("B"));
         // System.out.println("Busco el padre del nodo C: " + arbol.padre("C"));
