@@ -45,12 +45,14 @@ public class MixLineales {
         Pila p = new Pila();
         Cola c = new Cola();
         Cola aux = q.clone();
-        int pos = 1;
-        int contador = 1;
+        int pos = 1; // La lista empieza a insertar desde la posicion 1
+        int contador = 1; // Apilar si la posicion de los caracteres es impar y en caso contrario poner en
+                          // una Cola
         Object frente;
 
         while (!aux.esVacia()) {
             frente = aux.obtenerFrente();
+            // aux = [a,b,c,#,d,e,f,#,q,w,r,t,y,#,s,j]
 
             if (!frente.equals("#")) {
                 if (contador % 2 == 1) {
