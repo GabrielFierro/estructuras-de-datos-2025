@@ -5,7 +5,7 @@ import lineales.estaticas.Pila;
 import lineales.dinamicas.Nodo;*/
 
 public class TestPila {
-    public static void main(String [] args){
+    public static void main(String[] args) {
         // Zona de declaracion de variables
         Pila p1 = new Pila();
         Pila clon = new Pila();
@@ -29,7 +29,10 @@ public class TestPila {
 
         System.out.println("Obtener el tope de la pila (deberia ser 8): " + p1.obtenerTope());
 
-        /*System.out.println("Desapilar (esto deberia sacar el ultimo elemento): " + p1.desapilar());*/
+        /*
+         * System.out.println("Desapilar (esto deberia sacar el ultimo elemento): " +
+         * p1.desapilar());
+         */
         System.out.println("Desapilar (esto deberia sacar el primer elemento): " + p1.desapilar());
 
         System.out.println("Ver los elementos de la pila: " + p1.toString());
@@ -42,7 +45,7 @@ public class TestPila {
 
         System.out.println("Vacio la pila");
         p1.vaciar();
-        if(p1.esVacia()){
+        if (p1.esVacia()) {
             System.out.println("La pila esta vacia");
         }
 
@@ -64,18 +67,18 @@ public class TestPila {
         System.out.println("\nVer los elementos de la pila: " + p1.toString());
         System.out.println("\nVerifico si la pila esta vacia");
 
-        if(p1.esVacia()){
+        if (p1.esVacia()) {
             System.out.println("La pila esta vacia");
-        }else{
+        } else {
             System.out.println("La pila no esta vacia");
         }
 
         System.out.println("\nVerificar si la pila es Capicua");
 
         esCapicua = esCapicua(p1);
-        if(esCapicua){
+        if (esCapicua) {
             System.out.println("La pila es capicua");
-        } else{
+        } else {
             System.out.println("La pila no es capicua");
         }
 
@@ -89,33 +92,54 @@ public class TestPila {
         System.out.println("\nVer los elementos de la pila: " + p1.toString());
         System.out.println("\nVerifico si la pila esta vacia");
 
-        if(p1.esVacia()){
+        if (p1.esVacia()) {
             System.out.println("La pila esta vacia");
-        }else{
+        } else {
             System.out.println("La pila no esta vacia");
         }
 
         System.out.println("\nVerificar si la pila es Capicua");
 
         esCapicua = esCapicua(p1);
-        if(esCapicua){
+        if (esCapicua) {
             System.out.println("La pila es capicua");
-        } else{
+        } else {
             System.out.println("La pila no es capicua");
         }
     }
 
-    public static boolean esCapicua(Pila p1){
+    public static boolean esCapicuaONo(Pila p1) {
+        // Pila = [1,2,3,2,1];
+        Pila aux = new Pila();
+        Pila clon = p1.clone();
+        boolean exito = true;
+
+        while (!p1.esVacia()) {
+            aux.apilar(p1.obtenerTope());
+            p1.desapilar();
+        }
+
+        while (!clon.esVacia()) {
+            if (!clon.obtenerTope().equals(aux.obtenerTope())) {
+                exito = false;
+            }
+            clon.desapilar();
+            aux.desapilar();
+        }
+        return exito;
+    }
+
+    public static boolean esCapicua(Pila p1) {
         Pila p1Aux = new Pila();
         Pila p2 = p1.clone();
         boolean exito = true;
 
-        while(!p1.esVacia()){
+        while (!p1.esVacia()) {
             p1Aux.apilar(p1.obtenerTope());
             p1.desapilar();
         }
 
-        while(!p2.esVacia()) {
+        while (!p2.esVacia()) {
             if (!p2.obtenerTope().equals(p1Aux.obtenerTope())) {
                 exito = false;
             }
@@ -125,27 +149,29 @@ public class TestPila {
         return exito;
     }
 
-   /* public static boolean esCapicua(Pila p1){
-        // metodo recursivo sin terminar
-        // p1 = [1,2,3,2,1]
-        // p1Aux = [1,2,3,2,1]
-        Pila p1Aux = p1;
-        int ini, fin;
-        boolean exito = false;
-
-        if(p1.esVacia()){ // cambiar caso base
-            return true;
-        }else{
-            ini = (int) p1.obtenerTope(); // 1
-            p1.desapilar(); // [2,3,4,5,4,3,2,1]
-            exito = esCapicua(p1);
-            if(p1Aux.obtenerTope().equals(ini)){
-                exito = true;
-            }else{
-                exito = false;
-            }
-        }
-        return exito;
-
-    }*/
+    /*
+     * public static boolean esCapicua(Pila p1){
+     * // metodo recursivo sin terminar
+     * // p1 = [1,2,3,2,1]
+     * // p1Aux = [1,2,3,2,1]
+     * Pila p1Aux = p1;
+     * int ini, fin;
+     * boolean exito = false;
+     * 
+     * if(p1.esVacia()){ // cambiar caso base
+     * return true;
+     * }else{
+     * ini = (int) p1.obtenerTope(); // 1
+     * p1.desapilar(); // [2,3,4,5,4,3,2,1]
+     * exito = esCapicua(p1);
+     * if(p1Aux.obtenerTope().equals(ini)){
+     * exito = true;
+     * }else{
+     * exito = false;
+     * }
+     * }
+     * return exito;
+     * 
+     * }
+     */
 }

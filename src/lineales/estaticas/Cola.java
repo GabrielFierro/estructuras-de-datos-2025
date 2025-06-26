@@ -4,18 +4,19 @@
  */
 package lineales.estaticas;
 
-/************* Autores *********** 
-    - Gabriel Fierro, Legajo FAI-1938
-    - Juan Ignacio Veratti, Legajo FAI-5347
-    - Fernando Lopez, Legajo FAI-3996
-*/
+/*************
+ * Autores ***********
+ * - Gabriel Fierro, Legajo FAI-1938
+ * - Juan Ignacio Veratti, Legajo FAI-5347
+ * - Fernando Lopez, Legajo FAI-3996
+ */
 public class Cola {
 
     // Atributos
     private Object[] arreglo;
     private int frente;
     private int fin;
-    private static final int TAMANIO = 10;
+    private final int TAMANIO = 10;
 
     // Constructor
     public Cola() {
@@ -25,8 +26,10 @@ public class Cola {
     }
 
     public boolean poner(Object nuevoElem) {
-        /*Pone el elemento al final de la cola. Devuelve verdadero si
-        el elemento se pudo agregar en la estructura y falso en caso contrario.*/
+        /*
+         * Pone el elemento al final de la cola. Devuelve verdadero si
+         * el elemento se pudo agregar en la estructura y falso en caso contrario.
+         */
         boolean exito;
         if ((this.fin + 1) % TAMANIO == this.frente) { // La cola esta llena.
             // La cola esta llena
@@ -39,10 +42,12 @@ public class Cola {
         return exito;
     }
 
-    
     public boolean sacar() {
-        /* Saca el elemento que está en el frente de la cola. Devuelve verdadero si el elemento
-         se pudo sacar (la estructura no estaba vacía) y falso en caso contrario.*/
+        /*
+         * Saca el elemento que está en el frente de la cola. Devuelve verdadero si el
+         * elemento
+         * se pudo sacar (la estructura no estaba vacía) y falso en caso contrario.
+         */
         boolean exito = true;
 
         if (this.frente == this.fin) { // La cola está vacía
@@ -54,9 +59,9 @@ public class Cola {
         return exito;
     }
 
-
     public Object obtenerFrente() {
-        // Devuelve el elemento que está en el frente. Precondición: la cola no está vacía.
+        // Devuelve el elemento que está en el frente. Precondición: la cola no está
+        // vacía.
         Object elem;
         if (this.esVacia()) {
             elem = null;
@@ -73,7 +78,7 @@ public class Cola {
 
     public void vaciar() {
         // Saca todos los elementos de la estructura.
-        while(this.frente != this.fin){
+        while (this.frente != this.fin) {
             this.arreglo[this.frente] = null; // Elimina el elemento
             this.frente = (this.frente + 1) % this.TAMANIO; // Avanza de forma circular
         }
@@ -81,8 +86,10 @@ public class Cola {
 
     @Override
     public Cola clone() {
-        /* Devuelve una copia exacta de los datos en la estructura original, 
-        y respetando el orden de los mismos, en otra estructura del mismo tipo*/
+        /*
+         * Devuelve una copia exacta de los datos en la estructura original,
+         * y respetando el orden de los mismos, en otra estructura del mismo tipo
+         */
         Cola copia = new Cola();
 
         // Copiamos los elementos de la cola original a la nueva
@@ -99,11 +106,13 @@ public class Cola {
         return copia;
     }
 
-    
     @Override
     public String toString() {
-        /* Crea y devuelve una cadena de caracteres formada por todos los elementos de la cola
-         para poder mostrarla por pantalla.*/
+        /*
+         * Crea y devuelve una cadena de caracteres formada por todos los elementos de
+         * la cola
+         * para poder mostrarla por pantalla.
+         */
         String salida = "[";
         int i = this.frente;
         while (i != this.fin) {

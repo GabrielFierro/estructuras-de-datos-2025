@@ -1,14 +1,12 @@
 package test.lineales;
 
-import lineales.dinamicas.Lista;
-import lineales.dinamicas.Nodo;
+import lineales.dinamicas.*;
 
 public class TestLista {
-    public static void main(String [] args){
+    public static void main(String[] args) {
         // Zona de declaracion de variables
         Lista l1 = new Lista();
         Lista clon = new Lista();
-        boolean esCapicua;
 
         // Secuencia de valores enteros 1,5,3,7,2,8
         System.out.println("\nTest para Lista");
@@ -35,13 +33,16 @@ public class TestLista {
 
         System.out.println("\nVer los elementos de la lista: " + l1.toString());
 
-        System.out.println("\nRecuperar un elemento de la lista en la pos 3 (debe ser el numero 7): " + l1.recuperar(3));
+        System.out
+                .println("\nRecuperar un elemento de la lista en la pos 3 (debe ser el numero 7): " + l1.recuperar(3));
 
-        System.out.println("\nVer los elementos de la lista despues de recuperar un elemento en la pos 3: " + l1.toString());
+        System.out.println(
+                "\nVer los elementos de la lista despues de recuperar un elemento en la pos 3: " + l1.toString());
 
         System.out.println("\nLocalizar la posicion del elemento 8 (debe ser la posicion 5): " + l1.localizar(8));
 
-        System.out.println("\nVer los elementos de la lista despues de localizar un elemento en la pos 5: " + l1.toString());
+        System.out.println(
+                "\nVer los elementos de la lista despues de localizar un elemento en la pos 5: " + l1.toString());
 
         System.out.println("\nVacio la lista: " + l1.vaciar());
         System.out.println("\nVerificar si la lista esta vacia: " + l1.esVacia());
@@ -63,9 +64,11 @@ public class TestLista {
 
         System.out.println("\nVer la longitud de la lista (deberia ser 1): " + l1.longitud());
 
-        System.out.println("\nRecuperar un elemento de la lista en la pos 0 (debe ser el numero 0): " + l1.recuperar(1));
+        System.out
+                .println("\nRecuperar un elemento de la lista en la pos 0 (debe ser el numero 0): " + l1.recuperar(1));
 
-        System.out.println("\nVer los elementos de la lista despues de recuperar un elemento en la pos 0: " + l1.toString());
+        System.out.println(
+                "\nVer los elementos de la lista despues de recuperar un elemento en la pos 0: " + l1.toString());
 
         System.out.println("\nLocalizar la posicion del elemento 0 (debe ser la posicion 0): " + l1.localizar(1));
 
@@ -83,7 +86,8 @@ public class TestLista {
         System.out.println("\nVer la longitud de la lista (deberia ser 5): " + l1.longitud());
         System.out.println("\nVer los elementos de la lista: " + l1.toString());
 
-        System.out.println("\nLocalizar un elemento que no existe el elemento 299 (deberia retornar -1): " + l1.localizar(299));
+        System.out.println(
+                "\nLocalizar un elemento que no existe el elemento 299 (deberia retornar -1): " + l1.localizar(299));
 
         System.out.println("\nEliminar en una posicion especial (pos 0): " + l1.eliminar(1));
 
@@ -96,5 +100,39 @@ public class TestLista {
         System.out.println("\nEliminar en una posicion invalida (pos 15): " + l1.eliminar(15));
 
         System.out.println("\nVer los elementos de la lista despues de eliminar en la posicion 15: " + l1.toString());
+    }
+
+    public static Lista generarLista(Cola q) {
+        Lista lis = new Lista();
+        Pila p = new Pila();
+        Cola c = new Cola();
+        int pos = 0;
+        Object frente;
+
+        while (!q.esVacia()) {
+            frente = q.obtenerFrente();
+
+            if (!frente.equals('#')) {
+                p.apilar(frente);
+                c.poner(frente);
+            } else {
+                while (!p.esVacia()) {
+                    lis.insertar(p.obtenerTope(), pos);
+                    pos++;
+                    p.desapilar();
+                }
+                // lis.insertar('#', pos);
+                // pos++;
+                while (!q.esVacia()) {
+                    lis.insertar(q.obtenerFrente(), pos);
+                    pos++;
+                    q.sacar();
+                }
+                lis.insertar('#', pos);
+                pos++;
+            }
+        }
+
+        return lis;
     }
 }
