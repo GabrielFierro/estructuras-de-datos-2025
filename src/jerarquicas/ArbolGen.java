@@ -1,7 +1,6 @@
 package jerarquicas;
 
 import lineales.dinamicas.*;
-import lineales.estaticas.*;
 
 public class ArbolGen {
     private NodoGen raiz;
@@ -12,6 +11,8 @@ public class ArbolGen {
 
     public boolean insertar(Object elemNuevo, Object elemPadre, char posHijo) {
         boolean exito = true;
+        // 1
+        // 2 3 4
 
         if (this.raiz == null) {
             // si el arbol esta vacio, pone elem nuevo en la raiz
@@ -41,49 +42,51 @@ public class ArbolGen {
         return exito;
     }
 
-    public boolean insertar(Object elemNuevo, Object elemPadre) {
-        // Inserta elemNuevo como hijo del primer nodo encontrado en preorden
-        // igual a elemPadre, como hijo extremo izquierdo (HEI) o hermano derecho de HEI
-        // (HD), segun
-        // lo indique el parametro lugar
-        // Zona de declaracion e inicializacion de variable
-        boolean exito = true;
+    // public boolean insertar(Object elemNuevo, Object elemPadre) {
+    // // Inserta elemNuevo como hijo del primer nodo encontrado en preorden
+    // // igual a elemPadre, como hijo extremo izquierdo (HEI) o hermano derecho de
+    // HEI
+    // // (HD), segun
+    // // lo indique el parametro lugar
+    // // Zona de declaracion e inicializacion de variable
+    // boolean exito = true;
 
-        if (this.raiz == null) {
-            // si el arbol esta vacio, ponemos el elem nuevo en la raiz
-            this.raiz = new NodoGen(elemNuevo, null, null);
-        } else {
-            // si no esta vacio, se busca al padre
-            NodoGen nodoPadre = obtenerNodo(this.raiz, elemPadre);
-            if (nodoPadre != null) {
-                // Si encontro el nodo padre pregunto por el HEI
-                NodoGen hijo = nodoPadre.getHijoIzquierdo();
-                NodoGen nuevo = new NodoGen(elemNuevo, null, null);
+    // if (this.raiz == null) {
+    // // si el arbol esta vacio, ponemos el elem nuevo en la raiz
+    // this.raiz = new NodoGen(elemNuevo, null, null);
+    // } else {
+    // // si no esta vacio, se busca al padre
+    // NodoGen nodoPadre = obtenerNodo(this.raiz, elemPadre);
+    // if (nodoPadre != null) {
+    // // Si encontro el nodo padre pregunto por el HEI
+    // NodoGen hijo = nodoPadre.getHijoIzquierdo();
+    // NodoGen nuevo = new NodoGen(elemNuevo, null, null);
 
-                if (hijo != null) {
-                    // Si tiene HEI pregunta si no posee hermano derecho le setea el nodo nuevo
-                    // creado anteriormente
-                    // Sino lo tiene recorre los hermanos derecho de HEI hasta llegar al ultimo y le
-                    // setea el nodo nuevo
-                    // creado anteriormente
-                    if (hijo.getHermanoDerecho() == null) {
-                        hijo.setHermanoDerecho(nuevo);
-                    } else {
-                        while (hijo.getHermanoDerecho() != null) {
-                            hijo = hijo.getHermanoDerecho();
-                        }
-                        hijo.setHermanoDerecho(nuevo);
-                    }
-                } else {
-                    // Si no tiene nodo hijo le setea el nodo nuevo ccreado anteriormente
-                    nodoPadre.setHijoIzquierdo(nuevo);
-                }
-            } else {
-                exito = false;
-            }
-        }
-        return exito;
-    }
+    // if (hijo != null) {
+    // // Si tiene HEI pregunta si no posee hermano derecho le setea el nodo nuevo
+    // // creado anteriormente
+    // // Sino lo tiene recorre los hermanos derecho de HEI hasta llegar al ultimo y
+    // le
+    // // setea el nodo nuevo
+    // // creado anteriormente
+    // if (hijo.getHermanoDerecho() == null) {
+    // hijo.setHermanoDerecho(nuevo);
+    // } else {
+    // while (hijo.getHermanoDerecho() != null) {
+    // hijo = hijo.getHermanoDerecho();
+    // }
+    // hijo.setHermanoDerecho(nuevo);
+    // }
+    // } else {
+    // // Si no tiene nodo hijo le setea el nodo nuevo ccreado anteriormente
+    // nodoPadre.setHijoIzquierdo(nuevo);
+    // }
+    // } else {
+    // exito = false;
+    // }
+    // }
+    // return exito;
+    // }
 
     private NodoGen obtenerNodo(NodoGen n, Object buscado) {
         NodoGen resultado = null;
@@ -143,14 +146,14 @@ public class ArbolGen {
     private boolean perteneceAux(NodoGen nodo, Object buscado) {
         // Recorrido en preorden para buscar el elemento
         boolean exito = false;
-
+        // Entro con raiz en A y busca X
         if (nodo != null) {
             if (nodo.getElem().equals(buscado)) {
                 exito = true;
             } else {
                 NodoGen hijo = nodo.getHijoIzquierdo();
                 while (hijo != null) {
-                    exito = perteneceAux(nodo.getHijoIzquierdo(), buscado);
+                    exito = perteneceAux(hijo, buscado);
                     hijo = hijo.getHermanoDerecho();
                 }
             }
@@ -239,57 +242,97 @@ public class ArbolGen {
         return nivel;
     }
 
+    // public Object padre(Object buscado) {
+    // // Dado un elemento devuelve el valor almacenado en su nodo padre
+    // // Busca la primer aparicion del elemento padre.
+    // Object padre = null;
+    // NodoGen nodo = this.raiz;
+
+    // if (this.raiz != null) {
+    // if (!this.raiz.getElem().equals(buscado)) {
+    // padre = padreAux(nodo, buscado);
+    // }
+    // }
+    // return padre;
+    // }
+
+    // private Object padreAux(NodoGen nodo, Object buscado) {
+    // Object padre = null;
+    // NodoGen nodoIzq, nodoDer;
+
+    // if (nodo != null) {
+    // // Esto solo funciona con los arboles binarios, falta que itere los hermanos
+    // // derechos
+    // // Corregir
+    // nodoIzq = nodo.getHijoIzquierdo();
+    // if (nodoIzq != null) {
+    // if (nodoIzq.getElem().equals(buscado)) {
+    // padre = nodo.getElem();
+    // } else {
+    // nodoDer = nodoIzq.getHermanoDerecho();
+    // if (nodoDer.getElem().equals(buscado)) {
+    // padre = nodo.getElem();
+    // } else {
+    // padre = padreAux(nodoIzq, buscado);
+    // if (padre == null) {
+    // // nodo = 24 = C con HI = 31 = F
+    // // nodoIzq = 31 = F
+    // // nodoDer = 32 = G
+    // // Corregir esto y hacer que funcione para todos los hermanos derechos
+    // while (nodoDer != null) {
+    // if (nodoDer.getElem().equals(buscado)) {
+    // padre = nodo.getElem();
+    // } else {
+    // padre = padreAux(nodoDer, buscado);
+    // }
+    // nodoDer = nodoDer.getHermanoDerecho();
+    // }
+    // }
+    // }
+    // }
+    // }
+    // }
+    // return padre;
+    // }
+
     public Object padre(Object buscado) {
-        // Dado un elemento devuelve el valor almacenado en su nodo padre
-        // Busca la primer aparicion del elemento padre.
-        Object padre = null;
-        NodoGen nodo = this.raiz;
+        // Metodo que dado una estructura de tipo Arbol Generico y un elemento de tipo
+        // Object que recibe por parametro,
+        // verifica que posea elementos. Luego, busca el nodo padre llamando a un metodo
+        // auxiliar si fuese necesario.
+        // Zona de declaracion de variable
+        Object resultado;
+        // Zona de inicializacion de variable
+        resultado = null; // En caso de que el elemento a buscar sea el elemento raiz retorna null
 
         if (this.raiz != null) {
-            if (!this.raiz.getElem().equals(buscado)) {
-                padre = padreAux(nodo, buscado);
+            if (!this.raiz.getElem().equals(buscado)) { // Si el elemento buscado no está en la raíz lo busca
+                resultado = padreAux(this.raiz, this.raiz.getElem(), buscado);
             }
         }
-        return padre;
+        return resultado;
     }
 
-    private Object padreAux(NodoGen nodo, Object buscado) {
-        Object padre = null;
-        NodoGen nodoIzq, nodoDer;
+    private Object padreAux(NodoGen nodo, Object padre, Object buscado) {
+        // Metodo privado recursivo porque recibe un nodo de la estructura. Ademas
+        // recibe un elemento de tipo Object del cual
+        // debe buscar su elemento padre en la estructura.
+        // Zona de declaracion de variables
+        Object resultado;
+        // Zona de inicializacion de variable
+        resultado = null;
 
         if (nodo != null) {
-            // Esto solo funciona con los arboles binarios, falta que itere los hermanos
-            // derechos
-            // Corregir
-            nodoIzq = nodo.getHijoIzquierdo();
-            if (nodoIzq != null) {
-                if (nodoIzq.getElem().equals(buscado)) {
-                    padre = nodo.getElem();
-                } else {
-                    nodoDer = nodoIzq.getHermanoDerecho();
-                    if (nodoDer.getElem().equals(buscado)) {
-                        padre = nodo.getElem();
-                    } else {
-                        padre = padreAux(nodoIzq, buscado);
-                        if (padre == null) {
-                            // nodo = 24 = C con HI = 31 = F
-                            // nodoIzq = 31 = F
-                            // nodoDer = 32 = G
-                            // Corregir esto y hacer que funcione para todos los hermanos derechos
-                            while (nodoDer != null) {
-                                if (nodoDer.getElem().equals(buscado)) {
-                                    padre = nodo.getElem();
-                                } else {
-                                    padre = padreAux(nodoDer, buscado);
-                                }
-                                nodoDer = nodoDer.getHermanoDerecho();
-                            }
-                        }
-                    }
+            if (nodo.getElem().equals(buscado)) {
+                resultado = padre;
+            } else {
+                resultado = padreAux(nodo.getHermanoDerecho(), padre, buscado);
+                if (resultado == null) {
+                    resultado = padreAux(nodo.getHijoIzquierdo(), nodo.getElem(), buscado);
                 }
             }
         }
-        return padre;
+        return resultado;
     }
 
     public Lista listarPreorden() {
@@ -493,6 +536,50 @@ public class ArbolGen {
             }
         }
         return s;
+    }
+
+    public boolean insertarEnPosicion(Object elem, int pos) {
+        boolean exito = false;
+        if (this.raiz != null) {
+            exito = insertarEnPosicionAux(this.raiz, elem, pos, 1);
+        }
+        return exito;
+    }
+
+    private boolean insertarEnPosicionAux(NodoGen nodo, Object elem, int pos, int contador) {
+        // Metodo que inserta ELEM como ultimo hijo del elemento que
+        // se encuentra en posicion POS en PREORDEN
+        // insertarEnPosicion('B', 6) => HEI de Y
+        boolean exito = false;
+
+        if (nodo != null) {
+            if (contador == pos) {
+                NodoGen hijo = nodo.getHijoIzquierdo();
+
+                NodoGen aux = new NodoGen(elem, null, null);
+                if (hijo != null) {
+                    while (hijo != null && !exito) {
+                        if (hijo.getHermanoDerecho() == null) {
+                            hijo.setHermanoDerecho(aux);
+                            exito = true;
+                        } else {
+                            hijo = hijo.getHermanoDerecho();
+                        }
+                    }
+                } else {
+                    nodo.setHijoIzquierdo(aux);
+                }
+            } else {
+                NodoGen hijo = nodo.getHijoIzquierdo();
+                while (hijo != null) {
+                    contador++;
+                    exito = insertarEnPosicionAux(hijo, elem, pos, contador);
+                    hijo = hijo.getHermanoDerecho();
+                }
+            }
+        }
+
+        return exito;
     }
 
 }
