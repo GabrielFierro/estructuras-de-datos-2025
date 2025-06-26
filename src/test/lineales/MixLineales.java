@@ -44,12 +44,13 @@ public class MixLineales {
         Lista lis = new Lista();
         Pila p = new Pila();
         Cola c = new Cola();
+        Cola aux = q.clone();
         int pos = 1;
         int contador = 1;
         Object frente;
 
-        while (!q.esVacia()) {
-            frente = q.obtenerFrente();
+        while (!aux.esVacia()) {
+            frente = aux.obtenerFrente();
 
             if (!frente.equals("#")) {
                 if (contador % 2 == 1) {
@@ -75,7 +76,7 @@ public class MixLineales {
                 pos++;
                 contador++;
             }
-            q.sacar();
+            aux.sacar();
         }
         if (contador % 2 == 1) {
             while (!p.esVacia()) {
